@@ -1,0 +1,113 @@
+
+<div *ngIf="newUserAlertVisible" class="alert alert-success alert-dismissible fade show" role="alert">
+  {{korisnikNovi.ime + " " + korisnikNovi.prezime}} se priključio/la chat-u!
+</div>
+
+<div id="app" class="app">
+
+  <section id="main-left" class="main-left">
+
+    <div id="header-left" class="header-left">
+      <H4 class="name friend-name" style="color: white; white-space: nowrap;">Lista aktivnih korisnika</H4>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div style="width: 100%" class="friends-credent-resp">
+      <div *ngFor="let user of activeUsers" class="users-list" style="width: 100%">
+        <ul style="width: 100%" class="friends-chat-name">
+          <ul style="width: 100%">
+            <img src="https://cdn-icons-png.flaticon.com/512/9654/9654103.png" width="20" height="20" alt="Icon" class="img-small">
+            <span>{{ user.ime + " " + user.prezime }}</span>
+          </ul>
+        </ul>
+      </div>
+    </div>
+
+    <div id="self-info" class="self-info">
+      <h4  class="name your-name">{{ signalRservice.ime }}</h4>
+      <span class="glyphicon glyphicon-cog" ></span>
+    </div>
+
+  </section>
+
+  <section id="main-right" class="main-right">
+
+    <div id="header-right" class="header-right">
+      <div class="toggle-sidebar-resp">
+      <button style="background-color: white" class="btn btn-primary toggle-sidebar-resp" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+        <span class="custom-hamburger-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+
+          <h5 class="offcanvas-title " id="offcanvasWithBothOptionsLabel">Lista aktivnih korisnika </h5>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="friends-credent">
+
+            <div *ngFor="let user of activeUsers" class="users-list">
+              <ul class="friends-chat-name">
+                <ul>
+                  <img src="https://cdn-icons-png.flaticon.com/512/9654/9654103.png" width="20" height="20" alt="Icon" class="img-small">
+                  <span>{{ user.ime + " " + user.prezime }}</span>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <h4 style="white-space: nowrap;" class="name friend-name">Generalni razgovor</h4>
+
+      <div class="some-btn">
+        <span class="glyphicon glyphicon-facetime-video"></span>
+        <span class="glyphicon glyphicon-earphone"></span>
+        <span class="glyphicon glyphicon-option-vertical option-btn"></span>
+      </div>
+    </div>
+
+
+    <div id="chat-area" class="chat-area">
+      <div class="card-body" style="margin-left: 40px;">
+        <div *ngFor="let message of messages" class="message">
+          <div class="friends-chat-content">
+            <p class="friends-chat-name">{{ message.sender }}</p>
+            <p class="friends-chat-balloon">{{ message.text }}</p>
+            <h5 class="chat-datetime">{{getCurrentDateTime()}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="typing-area" class="typing-area">
+      <input id="type-area" class="type-area" [(ngModel)]="msg" type="text" id="messageInput" placeholder="Unesite vašu poruku...">
+      <div class="attach-btn">
+        <span class="glyphicon glyphicon-paperclip file-btn"></span>
+        <span class="glyphicon glyphicon-camera"></span>
+        <span class="glyphicon glyphicon-picture"></span>
+      </div>
+
+      <button (click)="sendMsg()" style="background-color: transparent; color: inherit; border: none; outline: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+          <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+        </svg>
+      </button>
+
+      <span class="glyphicon glyphicon-send send-btn"></span>
+    </div>
+
+  </section>
+
+</div>
+
+
+
+
+
+
+
+
